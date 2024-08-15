@@ -1,9 +1,11 @@
-# Meu clicker app eba
-Só pra lembrar, se der erro sei lá, use no terminal:
-```
-npx create-expo-app Clique --template blank
-```
-E substitui com esses, depois pros pacotes
-```
+# My clicker app
+It's just like a cookie clicker, but has dark mode and light mode cuz I was trying to understand how it works. </br>
+If you want mess up with the code, when you extract the zip use this command on the folder to get the dependencies:
+````
 npm install
+````
+Since I used expo you run the command
 ```
+npx expo start
+```
+Have fun!😉
