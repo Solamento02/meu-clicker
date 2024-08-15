@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
-// separar os botões, adicionar tema escuro(automatico) e colocar um som quando apertar os botões
+import { StyleSheet, Text, View, TouchableOpacity, useColorScheme } from 'react-native';
 
 export default function App() {
   const [cookieCount, setCookieCount ] = useState(0);
@@ -14,16 +12,28 @@ export default function App() {
     setCookieCount(0);
   }
 
+  const colorScheme = useColorScheme();
+
+  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
+
+  const themeButton = 
+      colorScheme === 'light' ? styles.lightButton : styles.darkButton;
+
+  const themeTextButton =
+      colorScheme == 'light' ? styles.lightTextButton : styles.darkTextButton;
+      
   return (
-    <View style={styles.container}>
-      <Text style={styles.cookieText}>Toques: {cookieCount}</Text>
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>Clique Aqui</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={reset}>
-        <Text style={styles.buttonText}>Resetar</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={[styles.container, themeContainerStyle]}>
+          <TouchableOpacity style={[styles.button, themeButton]} onPress={reset}>
+            <Text style={[styles.buttonText, themeTextButton]}>Resetar</Text>
+          </TouchableOpacity>
+            <Text style={[styles.cookieText, themeTextStyle]}>Toques: {cookieCount}</Text>
+          <TouchableOpacity style={[styles.button, themeButton]} onPress={handlePress}>
+            <Text style={[styles.buttonText, themeTextButton]}>Clique Aqui</Text>
+          </TouchableOpacity>
+      </View>
   );
 }
 
@@ -39,12 +49,39 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#ffcc00',
     padding: 20,
     borderRadius: 5,
+    margin: 10,
   },
   buttonText: {
     fontSize: 30,
+    color: '#fff',
+  },
+  darkTextButton: {
+    color: '#2A314B',
+  },
+  lightTextButton: {
     color: '#fff'
-  }
+  },
+  lightButton: {
+    backgroundColor: '#2A314B',
+  },
+  darkButton: {
+    backgroundColor: '#fff'
+  },
+  text: {
+    fontSize: 20,
+  },
+  lightContainer: {
+    backgroundColor: '#f5f5f5',
+  },
+  darkContainer: {
+    backgroundColor: '#242c40',
+  },
+  lightThemeText: {
+    color: '#242c40',
+  },
+  darkThemeText: {
+    color: '#fff',
+  },
 })
